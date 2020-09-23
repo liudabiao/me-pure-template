@@ -165,6 +165,7 @@ export default {
   },
   created() {
     let decodeUrl = decodeURIComponent(window.location.href)
+    if (decodeUrl.indexOf('code') < 0) return
     const decodeUrlCode =
       decodeUrl
         .split('?')

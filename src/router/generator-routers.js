@@ -3,10 +3,6 @@ import * as loginService from '@/api/login'
 // eslint-disable-next-line
 import { BasicLayout, BlankLayout, PageView, RouteView } from '@/layouts'
 import Vue from 'vue'
-
-//temp 临时菜单数据
-import NAV from '@/temp/nav'
-
 // 前端路由表
 const constantRouterComponents = {
   // 基础页面 layout 必须引入
@@ -29,15 +25,6 @@ const constantRouterComponents = {
   'Exception403': () => import(/* webpackChunkName: "fail" */ '@/views/exception/403'),
   'Exception404': () => import(/* webpackChunkName: "fail" */ '@/views/exception/404'),
   'Exception500': () => import(/* webpackChunkName: "fail" */ '@/views/exception/500'),
-
-  // account 用户中心（固定不用改）
-  'AccountCenter': () => import('@/views/account/center/Index'),
-  'AccountSettings': () => import('@/views/account/settings/Index'),
-  'BaseSettings': () => import('@/views/account/settings/BaseSetting'),
-  'SecuritySettings': () => import('@/views/account/settings/Security'),
-  'CustomSettings': () => import('@/views/account/settings/Custom'),
-  'BindingSettings': () => import('@/views/account/settings/Binding'),
-  'NotificationSettings': () => import('@/views/account/settings/Notification'),
 }
 
 // 前端未找到页面路由（固定不用改）

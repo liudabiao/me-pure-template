@@ -1,11 +1,12 @@
 {
-  "name": "vue-antd-pro",
-  "version": "2.1.0",
+  "name": "me-pure-template",
+  "version": "0.0.1",
   "private": true,
   "scripts": {
     "start": "node index.js",
     "server": "nodemon index.js --ignore client",
-    "serve": "vue-cli-service serve",
+    "serveForDev": "vue-cli-service serve --mode dev",
+    "serveForPro": "vue-cli-service serve --mode pro",
     "build": "vue-cli-service build",
     "test:unit": "vue-cli-service test:unit",
     "lint": "vue-cli-service lint",

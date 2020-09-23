@@ -1,0 +1,13 @@
+{
+    "port": "/proxyUser",
+    "post": [
+        {
+            "api": "/auth/login"
+        }
+    ],
+    "get": [
+        {
+            "api": "ad"
+        }
+    ]
+}

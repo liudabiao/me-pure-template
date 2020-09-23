@@ -1,12 +1,38 @@
 const path = require('path')
 const webpack = require('webpack')
 const createThemeColorReplacerPlugin = require('./config/plugin.config')
+const generatorApi = require('./src/autoApi')
+generatorApi()
+
+const basePort = {
+  production: {
+    proxyUser: '7001'
+  },
+  dev: {
+    proxyUser: '7001'
+  }
+}
+
+const BASE_URL = process.env.VUE_APP_API_BASE_URL
+const portType = process.env.PORT_TYPE || process.env.NODE_ENV
+const portKeys = Object.keys(basePort[portType])
+const proxyTable = JSON.parse(`{
+${portKeys.map(item => `"/${item}":
+{
+  "target":"${BASE_URL}:${basePort[portType][item]}",
+  "changeOrigin":true,
+  "pathRewrite":{
+    "^/${item}":""
+    }
+}`).join(',')}}`)
+
 
 function resolve(dir) {
   return path.join(__dirname, dir)
 }
 
 const isProd = process.env.NODE_ENV === 'production'
+
 
 const assetsCDN = {
   // webpack build externals
@@ -88,16 +114,7 @@ const vueConfig = {
     // development server port 8000
     port: 8000,
     // If you want to turn on the proxy, please remove the mockjs /src/main.jsL11
-    proxy: {
-      '^/egg': {
-        target: 'http://localhost:7001',
-        changeOrigin: true,
-        ws: false,
-        pathRewrite: {
-          '^/egg': ''
-        },
-      }
-    }
+    proxy: proxyTable
   },
 
   // disable source map in production
@@ -105,13 +122,6 @@ const vueConfig = {
   lintOnSave: true,
   // babel-loader no-ignore node_modules/*
   transpileDependencies: []
-}
-
-// preview.pro.loacg.com only do not use in your production;
-if (process.env.VUE_APP_PREVIEW === 'true') {
-  console.log('VUE_APP_PREVIEW', true)
-  // add `ThemeColorReplacer` plugin to webpack plugins
-  vueConfig.configureWebpack.plugins.push(createThemeColorReplacerPlugin())
 }
 
 module.exports = vueConfig

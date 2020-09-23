@@ -23,7 +23,7 @@ export default {
   autoHideHeader: assist.autoHideHeader, //  auto hide header
   colorWeak: false,
   multiTab: assist.multiTab,
-  production: process.env.NODE_ENV === 'production', //&& process.env.VUE_APP_PREVIEW !== 'true',
+  production: process.env.NODE_ENV === 'production',
   // vue-ls options
   storageOptions: {
     namespace: 'pro__', // key prefix
