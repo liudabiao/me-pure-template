@@ -52,26 +52,22 @@ const rootRouter = {
  */
 export const generatorDynamicRouter = (token) => {
   return new Promise((resolve, reject) => {
-    // loginService.getCurrentUserNav(token).then(res => {
-    const nav = NAV
-    const res = {
-      result: nav
-    }
-    const { result } = res
-    const menuNav = []
-    const childrenNav = []
-    //      后端数据, 根级树数组,  根级 PID
-    listToTree(result, childrenNav, 0)
-    rootRouter.children = childrenNav
-    // Vue.ls.set('MENU_ARR', childrenNav)
-    menuNav.push(rootRouter)
-    const routers = generator(menuNav)
-    Vue.ls.set('MENU_ARR', routers)
-    routers.push(notFoundRouter)
-    resolve(routers)
-    // }).catch(err => {
-    //   reject(err)
-    // })
+    loginService.getCurrentUserNav(token).then(res => {
+      const { result } = res
+      const menuNav = []
+      const childrenNav = []
+      //      后端数据, 根级树数组,  根级 PID
+      listToTree(result, childrenNav, 0)
+      rootRouter.children = childrenNav
+      // Vue.ls.set('MENU_ARR', childrenNav)
+      menuNav.push(rootRouter)
+      const routers = generator(menuNav)
+      Vue.ls.set('MENU_ARR', routers)
+      routers.push(notFoundRouter)
+      resolve(routers)
+    }).catch(err => {
+      reject(err)
+    })
   })
 }
 

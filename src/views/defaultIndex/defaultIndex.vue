@@ -1,10 +1,15 @@
 <template>
-  <div>欢迎使用</div>
+  <div>
+    <alc />
+  </div>
 </template>
 <script>
+import alc from '@/components/ArticleListContent'
 export default {
-  name: 'defaultIndex'
+  name: 'defaultIndex',
+  components: {
+    alc
+  }
 }
 </script>
-<style lang="less" scoped>
-</style>
+<style lang="less" scoped></style>

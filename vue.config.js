@@ -9,7 +9,11 @@ const basePort = {
     proxyUser: '7001'
   },
   dev: {
-    proxyUser: '7001'
+    //有两种形式，如果只需要标明端口号 写法如example
+    //example:'8080',
+    //如果需要配置rewrite baseUrl 则如exampleObj
+    //example: {baseUrl: 'http://localhost',rewrite: '/exampleObj/test',port: '8080'}
+    proxyUser: '7001',
   }
 }
 
@@ -17,15 +21,15 @@ const BASE_URL = process.env.VUE_APP_API_BASE_URL
 const portType = process.env.PORT_TYPE || process.env.NODE_ENV
 const portKeys = Object.keys(basePort[portType])
 const proxyTable = JSON.parse(`{
-${portKeys.map(item => `"/${item}":
+${portKeys.map(item => `"^/${item}":
 {
-  "target":"${BASE_URL}:${basePort[portType][item]}",
+  "target":"${!!basePort[portType][item].baseUrl ? basePort[portType][item].baseUrl : BASE_URL}:${!!basePort[portType][item].port ? basePort[portType][item].port : basePort[portType][item]}",
   "changeOrigin":true,
   "pathRewrite":{
-    "^/${item}":""
+    "^/${item}":"${!!basePort[portType][item].rewrite ? '/' + basePort[portType][item].rewrite : ''}"
     }
 }`).join(',')}}`)
-
+console.log(proxyTable)
 
 function resolve(dir) {
   return path.join(__dirname, dir)

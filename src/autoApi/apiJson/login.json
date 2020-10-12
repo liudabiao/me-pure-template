@@ -3,11 +3,17 @@
     "post": [
         {
             "api": "/auth/login"
+        },
+        {
+            "api":"/getCurrentUserNav"
         }
     ],
     "get": [
         {
             "api": "ad"
+        },
+        {
+            "api": "hello"
         }
     ]
 }

@@ -8,12 +8,13 @@ import { ACCESS_TOKEN } from '@/store/mutation-types'
 // 创建 axios 实例
 const service = axios.create({
   baseUrl: '',
-  timeout: 600000 // 请求超时时间
+  timeout: 600000, // 请求超时时间
 })
 
 const customService = axios.create({ timeout: 60000 })
 
 const err = (error) => {
+  console.log(error)
   if (error.response) {
     const data = error.response.data
     const token = Vue.ls.get(ACCESS_TOKEN)
@@ -51,6 +52,7 @@ service.interceptors.request.use(config => {
 
 // response interceptor
 service.interceptors.response.use((response) => {
+  console.log('----', response)
   return response.data
 }, err)
 
