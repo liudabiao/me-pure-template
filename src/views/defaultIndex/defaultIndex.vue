@@ -1,14 +1,18 @@
 <template>
   <div>
-    <alc />
+    <dl :col="2" term="asdasdasdasd" title="rfff">
+      <div>sdf</div>
+      <div>sdf</div>
+      <div>sdf</div>
+    </dl>
   </div>
 </template>
 <script>
-import alc from '@/components/ArticleListContent'
+import dl from '@/components/DescriptionList'
 export default {
   name: 'defaultIndex',
   components: {
-    alc
+    dl
   }
 }
 </script>
